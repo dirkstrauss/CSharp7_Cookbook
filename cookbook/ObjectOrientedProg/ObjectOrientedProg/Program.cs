@@ -497,6 +497,7 @@ namespace ObjectOrientedProg
             try
             {
                 File.ReadAllLines(fileName);
+                blnFileRead = true;
             }
             catch(FileNotFoundException ex) when (RetryRead(ex, iTryCount) == true)
             {
