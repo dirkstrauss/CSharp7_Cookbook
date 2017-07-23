@@ -4,3 +4,9 @@ C:\sc\cookbook\ObjectOrientedProg\ObjectOrientedProg\bin\Debug\ObjectOrientedPro
 C:\sc\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.csprojResolveAssemblyReference.cache
 C:\sc\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.exe
 C:\sc\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.pdb
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\bin\Debug\ObjectOrientedProg.exe.config
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\bin\Debug\ObjectOrientedProg.exe
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\bin\Debug\ObjectOrientedProg.pdb
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.csprojResolveAssemblyReference.cache
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.exe
+C:\z_Elysium\CSharp7_Cookbook\cookbook\ObjectOrientedProg\ObjectOrientedProg\obj\Debug\ObjectOrientedProg.pdb

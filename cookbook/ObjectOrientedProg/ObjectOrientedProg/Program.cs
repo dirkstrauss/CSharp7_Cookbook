@@ -5,7 +5,9 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ObjectOrientedProg
 {
@@ -45,32 +47,44 @@ namespace ObjectOrientedProg
             #endregion
 
             #region Leveraging encapsulation
-            double thrust = 220; // kN 
-            double shuttleMass = 16.12; // t 
-            double graviatatonalAccelerationEarth = 9.81;
-            double earthMass = 5.9742 * Math.Pow(10, 24);
-            double earthRadius = 6378100;
-            double thrustToWeightRatio = 0;
+            //double thrust = 220; // kN 
+            //double shuttleMass = 16.12; // t 
+            //double graviatatonalAccelerationEarth = 9.81;
+            //double earthMass = 5.9742 * Math.Pow(10, 24);
+            //double earthRadius = 6378100;
+            //double thrustToWeightRatio = 0;
 
-            LaunchShuttle NasaShuttle1 = new LaunchShuttle(thrust, shuttleMass, graviatatonalAccelerationEarth);
-            thrustToWeightRatio = NasaShuttle1.TWR();
-            Console.WriteLine(thrustToWeightRatio);
+            //LaunchShuttle NasaShuttle1 = new LaunchShuttle(thrust, shuttleMass, graviatatonalAccelerationEarth);
+            //thrustToWeightRatio = NasaShuttle1.TWR();
+            //Console.WriteLine(thrustToWeightRatio);
 
-            LaunchShuttle NasaShuttle2 = new LaunchShuttle(thrust, shuttleMass, LaunchShuttle.Planet.Earth);
-            thrustToWeightRatio = NasaShuttle2.TWR();
-            Console.WriteLine(thrustToWeightRatio);
+            //LaunchShuttle NasaShuttle2 = new LaunchShuttle(thrust, shuttleMass, LaunchShuttle.Planet.Earth);
+            //thrustToWeightRatio = NasaShuttle2.TWR();
+            //Console.WriteLine(thrustToWeightRatio);
 
-            LaunchShuttle NasaShuttle3 = new LaunchShuttle(thrust, shuttleMass, earthMass, earthRadius);
-            thrustToWeightRatio = NasaShuttle3.TWR();
-            Console.WriteLine(thrustToWeightRatio);
+            //LaunchShuttle NasaShuttle3 = new LaunchShuttle(thrust, shuttleMass, earthMass, earthRadius);
+            //thrustToWeightRatio = NasaShuttle3.TWR();
+            //Console.WriteLine(thrustToWeightRatio);
 
-            Console.Read();
+            //Console.Read();
             #endregion
 
             #region Exception Handling
-            //Chapter3 ch3 = new Chapter3();
-            //string File = @"c:\temp\XmlFile.xml";
-            //ch3.ReadXMLFile(File); 
+            Chapter3 ch3 = new Chapter3();
+            string File = @"c:\temp\XmlFile.xml";
+            //ch3.ReadXMLFile(File);
+            
+            bool blnFileRead = false;
+            int iTryCount = 0;
+            do
+            {
+                blnFileRead = ch3.TryReadXMLFile(File, iTryCount++);
+                Thread.Sleep(500);
+            } while (!blnFileRead);
+
+            
+            Console.ReadLine();
+
             #endregion
         }
     }
@@ -458,27 +472,50 @@ namespace ObjectOrientedProg
         #endregion
 
         #region Exception Retry Count
-        public void TryReadXMLFile(string fileName)
+        public bool TryReadXMLFile(string fileName, int iTryCount)
         {
+            #region ...
+            //bool blnFileRead = false;
+            //do
+            //{
+            //    int iTryCount = 0;
+            //    try
+            //    {
+            //        bool blnReadFileFlag = true;
+            //        if (blnReadFileFlag)
+            //            File.ReadAllLines(fileName);
+            //    }
+            //    catch (Exception ex) when (RetryRead(ex, iTryCount++) == true)
+            //    {
+
+            //        throw new Exception("Log Error");
+            //    }
+            //} while (!blnFileRead); 
+            #endregion
+
             bool blnFileRead = false;
-            do
+            try
             {
-                int iTryCount = 0;
-                try
-                {
-                    bool blnReadFileFlag = true;
-                    if (blnReadFileFlag)
-                        File.ReadAllLines(fileName);
-                }
-                catch (Exception ex) when (RetryRead(ex, iTryCount++) == true)
-                {
-                }
-            } while (!blnFileRead);
+                File.ReadAllLines(fileName);
+            }
+            catch(FileNotFoundException ex) when (RetryRead(ex, iTryCount) == true)
+            {
+                blnFileRead = false;
+                Console.WriteLine($"Retry File Read: {iTryCount}");
+            }
+            catch (Exception ex)
+            {
+                blnFileRead = true;
+                /* Log the error if blnThrowEx = false */
+                Console.WriteLine($"Failed to read file: {fileName}. Error: {ex.Message}");
+            }
+
+            return blnFileRead;
         }
         private bool RetryRead(Exception e, int tryCount)
         {
-            bool blnThrowEx = tryCount <= 10 ? blnThrowEx = false : blnThrowEx
-            = true;
+            bool blnThrowEx = tryCount <= 10 ? blnThrowEx = true : blnThrowEx
+            = false;
             /* Log the error if blnThrowEx = false */
             return blnThrowEx;
         }
